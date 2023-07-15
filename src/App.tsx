@@ -1,7 +1,18 @@
 import React from 'react'
 
 export function App() {
-  return (<div>
+  // Make a state using data:
+  const [game, setGame] = useState({
+    board: [
+      [' ', ' ', ' '],
+      [' ', ' ', ' '],
+      [' ', ' ', ' '],
+    ],
+    id: null,
+    winner: null,
+  })
+  return (
+    <div>
       <h1>
         Tic Tac Toe - <button>New</button>
       </h1>
@@ -16,5 +27,6 @@ export function App() {
         <li></li>
         <li></li>
       </ul>
-    </div>)
+    </div>
+  )
 }
