@@ -17,15 +17,15 @@ export function App() {
         Tic Tac Toe - <button>New</button>
       </h1>
       <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>{game.board[0][0]}</li>
+        <li>{game.board[0][1]}</li>
+        <li>{game.board[0][2]}</li>
+        <li>{game.board[1][0]}</li>
+        <li>{game.board[1][1]}</li>
+        <li>{game.board[1][2]}</li>
+        <li>{game.board[2][0]}</li>
+        <li>{game.board[2][1]}</li>
+        <li>{game.board[2][2]}</li>
       </ul>
     </div>
   )
