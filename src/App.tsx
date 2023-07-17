@@ -58,10 +58,15 @@ export function App() {
     }
   }
 
+  // Ternary operator used to dynamically change the header when the state of winner changes.
+  const header = game.winner
+    ? `${game.winner} is the winner!`
+    : 'Nandos Tic Tac Toe'
+
   return (
     <div>
       <h1>
-        Tic Tac Toe - <button onClick={handleNewGame}>New</button>
+        {header} - <button onClick={handleNewGame}>New</button>
       </h1>
       <ul>
         <li onClick={() => handleClickCell(0, 0)}>{game.board[0][0]}</li>
