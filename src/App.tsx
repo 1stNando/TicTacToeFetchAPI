@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
 export function App() {
-  type Board = [Row, Row, Row]
+  type Square = 'X' | 'O' | ' '
   type Row = [Square, Square, Square]
-  type Square = 'X' | 'O' | ''
+  type Board = [Row, Row, Row]
   // Last part: refine our TS, to define some types for the state to improve type checking.
   type Game = {
     board: Board
@@ -96,8 +96,7 @@ export function App() {
             return (
               <li
                 key={columnIndex}
-                // Add dynamic to set the class name of a <li> using ternary expression.
-                className={cell === '' ? '' : 'taken'}
+                className={cell === ' ' ? '' : 'taken'}
                 onClick={() => handleClickCell(rowIndex, columnIndex)}
               >
                 {cell}
