@@ -5,7 +5,7 @@ export function App() {
   const [game, setGame] = useState({
     board: [
       [' ', ' ', ' '],
-      [' ', ' ', ' '],
+      [' ', '?', ' '],
       [' ', ' ', ' '],
     ],
     id: null,
@@ -13,8 +13,29 @@ export function App() {
   })
 
   // Start with defining a method to HANDLE clicking a cell.
-  function handleClickCell(row: number, column: number) {
-    console.log(`You hace clicked on row ${row} and column ${column}`)
+  async function handleClickCell(row: number, column: number) {
+    //console.log(`You hace clicked on row ${row} and column ${column}`)
+
+    // Part 3: When we click a cell, we need to build an API request to send to the server.
+    // -Generate the URL we need in which we interpolate the value from game state.
+    const url = `https://sdg-tic-tac-toe-api.herokuapp.com/game/${game.id}`
+
+    // After the url, we make an object to send JSON
+    const body = { row: row, column: column }
+
+    // Make a POST request to make a move
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+    if (response.ok) {
+      // Get the response as JSON
+      const newGame = await response.json()
+
+      // Make that the new state!
+      setGame(newGame)
+    }
   }
 
   // Next, we need to "Create a new game" to get a "Game ID" so that we can register moves.
