@@ -86,6 +86,8 @@ export function App() {
             return (
               <li
                 key={columnIndex}
+                // Add dynamic to set the class name of a <li> using ternary expression.
+                className={cell === '' ? '' : 'taken'}
                 onClick={() => handleClickCell(rowIndex, columnIndex)}
               >
                 {cell}
