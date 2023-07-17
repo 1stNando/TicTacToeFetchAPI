@@ -14,6 +14,18 @@ export function App() {
 
   // Start with defining a method to HANDLE clicking a cell.
   async function handleClickCell(row: number, column: number) {
+    // Add guard clause to block the click for each condition we want to prevent. Statement that checks for conditions under which we don't want the rest of the function to execute
+    if (
+      // No game id
+      game.id === undefined ||
+      // A winner exists
+      game.winner ||
+      // The space isn't blank
+      game.board[row][column] !== ' '
+    ) {
+      return
+    }
+
     //console.log(`You hace clicked on row ${row} and column ${column}`)
 
     // Part 3: When we click a cell, we need to build an API request to send to the server.
