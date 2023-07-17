@@ -83,7 +83,7 @@ export function App() {
   // Ternary operator used to dynamically change the header when the state of winner changes.
   const header = game.winner
     ? `${game.winner} is the winner!`
-    : 'Nandos Unbeatable AI Powered Tic Tac Toe'
+    : 'Nandos AI Powered Tic Tac Toe'
 
   console.log('check!!')
 
