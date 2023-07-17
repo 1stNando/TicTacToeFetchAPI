@@ -1,6 +1,17 @@
 import React, { useState } from 'react'
 
 export function App() {
+  // Last part: refine our TS, to define some types for the state to improve type checking.
+  type Game = {
+    board: [
+      ['X' | 'O' | ' ', 'X' | 'O' | ' ', 'X' | 'O' | ' '],
+      ['X' | 'O' | ' ', 'X' | 'O' | ' ', 'X' | 'O' | ' '],
+      ['X' | 'O' | ' ', 'X' | 'O' | ' ', 'X' | 'O' | ' ']
+    ]
+    id: null | number
+    winner: null | string
+  }
+
   // Make a STATE using data:
   const [game, setGame] = useState({
     board: [
@@ -62,7 +73,7 @@ export function App() {
     )
 
     if (response.ok) {
-      // Get the response as JSON
+      // Get the response as JSON. Type: any at this point.
       const newGame = await response.json()
 
       // Make that the new STATE!
