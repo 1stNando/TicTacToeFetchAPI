@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
 export function App() {
+  type Square = 'X' | 'O' | ''
   // Last part: refine our TS, to define some types for the state to improve type checking.
   type Game = {
     board: [
-      ['X' | 'O' | ' ', 'X' | 'O' | ' ', 'X' | 'O' | ' '],
-      ['X' | 'O' | ' ', 'X' | 'O' | ' ', 'X' | 'O' | ' '],
-      ['X' | 'O' | ' ', 'X' | 'O' | ' ', 'X' | 'O' | ' ']
+      [Square, Square, Square],
+      [Square, Square, Square],
+      [Square, Square, Square]
     ]
     id: null | number
     winner: null | string
