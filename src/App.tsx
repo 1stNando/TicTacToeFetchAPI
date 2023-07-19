@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 
-export function App() {
-  type Square = 'X' | 'O' | ' '
-  type Row = [Square, Square, Square]
-  type Board = [Row, Row, Row]
-  // Last part: refine our TS, to define some types for the state to improve type checking.
-  type Game = {
-    board: Board
-    id: null | number
-    winner: null | string
-  }
+type Square = 'X' | 'O' | ' '
+type Row = [Square, Square, Square]
+type Board = [Row, Row, Row]
+// Last part: refine our TS, to define some types for the state to improve type checking.
+type Game = {
+  board: Board
+  id: null | number
+  winner: null | string
+}
 
+export function App() {
   // Make a STATE using data:
   const [game, setGame] = useState<Game>({
     board: [
@@ -90,25 +90,29 @@ export function App() {
   return (
     <div>
       <h1>
-        {header} - <button onClick={handleNewGame}>New</button>
+        {header} - {game.id} <button onClick={handleNewGame}>New</button>
       </h1>
-      <ul>
-        {game.board.map((boardRow, rowIndex) => {
-          return boardRow.map((cell, columnIndex) => {
-            console.log(cell)
-
-            return (
-              <li
-                key={columnIndex}
-                className={cell === ' ' ? '' : 'taken'}
-                onClick={() => handleClickCell(rowIndex, columnIndex)}
-              >
-                {cell}
-              </li>
-            )
+      <main className={game.winner === null ? undefined : 'game-over'}>
+        {game.board.map((row, rowIndex) => {
+          row.map((cell, columnIndex) => {
+            ;<Cell
+              key={columnIndex}
+              rowIndex={rowIndex}
+              columnIndex={columnIndex}
+              cell={game.board[rowIndex][columnIndex]}
+            />
+            // return (
+            //   <li
+            //     key={columnIndex}
+            //     className={cell === ' ' ? '' : 'taken'}
+            //     onClick={() => handleClickCell(rowIndex, columnIndex)}
+            //   >
+            //     {cell}
+            //   </li>
+            // )
           })
         })}
-      </ul>
+      </main>
       {
         ////////////////////////////////////////////////////////////////////
         /* <li onClick={() => handleClickCell(0, 0)}>{game.board[0][0]}</li>
@@ -122,5 +126,21 @@ export function App() {
         <li onClick={() => handleClickCell(2, 2)}>{game.board[2][2]}</li> */
       }
     </div>
+  )
+}
+type CellProps = {
+  cell: string
+  rowIndex: number
+  columnIndex: number
+}
+function Cell(props: CellProps) {
+  return (
+    <button
+      key={props.columnIndex}
+      className={props.cell === ' ' ? '' : 'taken'}
+      //onClick={() => handleClickCell(props.rowIndex, props.columnIndex)}
+    >
+      {props.cell}
+    </button>
   )
 }

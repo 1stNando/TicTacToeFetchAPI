@@ -38,7 +38,7 @@ h1 {
   background-color: var(--header-background);
 }
 
-ul,
+main,
 li {
   /* Be gone margins! */
   margin: 0;
@@ -48,7 +48,7 @@ li {
   list-style: none;
 }
 
-ul {
+main {
   /* Make the height of the list equal to the height of the page MINUS the height taken by the header */
   height: calc(100vh - 3 * var(--header-font-size));
 
@@ -63,7 +63,7 @@ ul {
   background-color: var(--square-text-color);
 }
 
-ul li {
+main li {
   /* Use a monospace font */
   font-family: monospace;
   font-size: var(--square-font-size);
@@ -81,14 +81,14 @@ ul li {
   transition: 1s font-size ease-in-out;
 }
 
-ul li.taken {
+main li.taken {
   cursor: not-allowed;
 }
 
-ul li.small {
+main li.small {
   font-size: 4rem;
 }
 
-ul li.not-allowed-click {
+main li.not-allowed-click {
   background-color: red;
 }
