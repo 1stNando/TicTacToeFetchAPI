@@ -135,5 +135,5 @@ export type CellProps = {
   cell: string
   rowIndex: number
   columnIndex: number
-  recordMove: (row: number, column: number) => void
+  recordMove: (_row: number, _column: number) => void
 }
