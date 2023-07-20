@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Cell } from './Cell'
 
 type Square = 'X' | 'O' | ' '
 type Row = [Square, Square, Square]
@@ -23,7 +24,7 @@ export function App() {
   })
 
   // Start with defining a method to HANDLE clicking a cell.
-  async function handleClickCell(row: number, column: number) {
+  async function recordMove(row: number, column: number) {
     // Add guard clause to block the click for each condition we want to prevent. Statement that checks for conditions under which we don't want the rest of the function to execute
     if (
       // No game id
@@ -93,13 +94,15 @@ export function App() {
         {header} - {game.id} <button onClick={handleNewGame}>New</button>
       </h1>
       <main className={game.winner === null ? undefined : 'game-over'}>
-        {game.board.map((row, rowIndex) => {
-          row.map((cell, columnIndex) => {
-            ;<Cell
+        {game.board.map((row, rowIndex) =>
+          row.map((column, columnIndex) => (
+            <Cell
               key={columnIndex}
               rowIndex={rowIndex}
               columnIndex={columnIndex}
               cell={game.board[rowIndex][columnIndex]}
+              // pass down behavior!
+              recordMove={recordMove}
             />
             // return (
             //   <li
@@ -110,8 +113,8 @@ export function App() {
             //     {cell}
             //   </li>
             // )
-          })
-        })}
+          ))
+        )}
       </main>
       {
         ////////////////////////////////////////////////////////////////////
@@ -128,19 +131,9 @@ export function App() {
     </div>
   )
 }
-type CellProps = {
+export type CellProps = {
   cell: string
   rowIndex: number
   columnIndex: number
-}
-function Cell(props: CellProps) {
-  return (
-    <button
-      key={props.columnIndex}
-      className={props.cell === ' ' ? '' : 'taken'}
-      //onClick={() => handleClickCell(props.rowIndex, props.columnIndex)}
-    >
-      {props.cell}
-    </button>
-  )
+  recordMove: (row: number, column: number) => void
 }
